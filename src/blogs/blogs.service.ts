@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateBlogDto } from './dto/create-blog.dto';
@@ -20,12 +20,20 @@ export class BlogsService {
   }
 
   findOne(id: string) {
-    // const blog = this.blogModel.find({_id: id}).exec()
-    // if(!blog){
-    //   throw new NotFoundException(`The blog with #${id} does not exiest`)
-    // }
-    // return blog
-    return 'find one'
+    const blog = this.blogModel.find({_id: id}).exec()
+    if(!blog){
+      throw new NotFoundException(`The blog with #${id} does not exiest`)
+    }
+    return blog
+    // return 'find one'
+  }
+
+  deleteAll(){
+    try{
+      return this.blogModel.deleteMany({}).exec()
+    }catch(error: any){
+      throw new BadRequestException('unable to delete')
+    }
   }
 
   update(id: number, updateBlogDto: UpdateBlogDto) {

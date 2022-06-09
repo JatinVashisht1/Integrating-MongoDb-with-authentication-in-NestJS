@@ -1,13 +1,22 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
+class blog{
+    title: string
+    content: string
+}
+
 @Schema()
 export class Blog extends Document{
+
     @Prop()
-    title: string
-    
+    username: string
+
     @Prop()
-    content: string
+    password: string
+
+    @Prop()
+    blog: blog
 
     @Prop([String])
     category: string[]

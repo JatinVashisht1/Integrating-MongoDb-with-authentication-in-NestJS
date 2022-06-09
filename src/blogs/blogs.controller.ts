@@ -28,6 +28,11 @@ export class BlogsController {
     return this.blogsService.update(+id, updateBlogDto);
   }
 
+  // @Delete('')
+  // removeAll(){
+  //   return this.blogsService.deleteAll()
+  // }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.blogsService.remove(+id);
