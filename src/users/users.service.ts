@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { IsNumber } from 'class-validator';
 import { Model } from 'mongoose';
+import { CreateBlogDto } from './dto/create-blog.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -33,8 +34,18 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(updateUserDto: UpdateUserDto) {
+    const updatedUser = this.userModel
+    .updateOne({username: updateUserDto.username}, {})
+    
+  }
+
+
+  postBlog(createBlogDto: CreateBlogDto){
+      return this.userModel.updateOne({username: createBlogDto.username},{
+        $push: {blog: createBlogDto.blog}
+      })
+      .exec()
   }
 
   remove(id: number) {
