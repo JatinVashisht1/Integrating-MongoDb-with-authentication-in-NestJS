@@ -4,22 +4,20 @@ import { Document } from "mongoose";
 class blog{
     title: string
     content: string
+    category: [string]
 }
 
 @Schema()
-export class Blog extends Document{
+export class User extends Document{
 
-    @Prop()
+    @Prop({unique: true})
     username: string
 
     @Prop()
     password: string
 
-    @Prop()
-    blog: blog
-
-    @Prop([String])
-    category: string[]
+    @Prop({required: true})
+    blog: [blog]
 }
 
-export const BlogSchema = SchemaFactory.createForClass(Blog)
+export const UserSchema = SchemaFactory.createForClass(User)
