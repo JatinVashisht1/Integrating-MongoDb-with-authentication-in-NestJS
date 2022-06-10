@@ -8,7 +8,7 @@ import { CreateBlogDto } from './dto/create-blog.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('create')
+  @Post('createUser')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -28,7 +28,7 @@ export class UsersController {
     return this.usersService.update(updateUserDto);
   }
 
-  @Post('addBlog')
+  @Post('createBlog')
   addBlog(@Body() createBlogDto: CreateBlogDto){
     return this.usersService.postBlog(createBlogDto)
   }
