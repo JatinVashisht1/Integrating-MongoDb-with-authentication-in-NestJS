@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
-export class UsersService {
+export class  UsersService {
 
   constructor(@InjectModel(User.name) private readonly userModel: Model<User> ){}
 
@@ -30,8 +30,8 @@ export class UsersService {
     return allUsers
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(username: string) {
+    return this.userModel.findOne({username: username}).exec()    
   }
 
   update(updateUserDto: UpdateUserDto) {
